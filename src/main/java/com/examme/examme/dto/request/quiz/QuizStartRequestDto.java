@@ -1,4 +1,4 @@
-package com.examme.examme.dto.quiz;
+package com.examme.examme.dto.request.quiz;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;

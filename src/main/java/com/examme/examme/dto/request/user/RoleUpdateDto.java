@@ -1,5 +1,6 @@
-package com.examme.examme.dto.quiz;
+package com.examme.examme.dto.request.user;
 
+import com.examme.examme.entity.enums.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class QuizSubmitAnswerDto {
-    private int questionId;
-    private String selectedAnswer;
+public class RoleUpdateDto {
+    private UserRole role;
 }
