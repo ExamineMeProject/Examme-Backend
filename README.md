@@ -1,4 +1,3 @@
-# Examme - Smart Examination Platform 🎓
 
 ![Java](https://img.shields.io/badge/Java-17-orange?style=for-the-badge&logo=java)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.3.0-green?style=for-the-badge&logo=springboot)
