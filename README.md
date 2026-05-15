@@ -4,7 +4,7 @@
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.3.0-green?style=for-the-badge&logo=springboot)
 ![MySQL](https://img.shields.io/badge/MySQL-8.0-blue?style=for-the-badge&logo=mysql)
 ![Docker](https://img.shields.io/badge/Docker-Enabled-blue?style=for-the-badge&logo=docker)
-![Grok AI](https://img.shields.io/badge/Gemini_AI-Integrated-purple?style=for-the-badge&logo=google-gemini)
+![Grok AI](https://img.shields.io/badge/Grok_AI-Integrated-black?style=for-the-badge&logo=x)
 
 ## 📝 Project Overview
 
