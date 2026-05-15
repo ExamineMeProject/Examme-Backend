@@ -32,13 +32,13 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class ExamPackageService {
 
-    private static final int MAX_TEXT_CHARS = 120_000;
+    private static final int MAX_TEXT_CHARS = 15_000;
 
     private final ExamPackageRepository examPackageRepository;
     private final StudyGroupRepository studyGroupRepository;
     private final UserRepository userRepository;
     private final FileProcessingUtil fileProcessingUtil;
-    private final GeminiQuestionGeneratorService geminiQuestionGeneratorService;
+    private final GroqQuestionGeneratorService groqQuestionGeneratorService;
 
     @Transactional
     public ExamPackageDetailDto create(Long groupId, MultipartFile file, int questionCount, Difficulty difficulty, String description)
@@ -62,7 +62,7 @@ public class ExamPackageService {
             extracted = extracted.substring(0, MAX_TEXT_CHARS);
         }
 
-        List<QuizQuestionResponseDto> generated = geminiQuestionGeneratorService.generateFromLectureText(
+        List<QuizQuestionResponseDto> generated = groqQuestionGeneratorService.generateFromLectureText(
                 extracted, questionCount, difficulty, description == null ? "" : description);
 
         String title = deriveTitle(file.getOriginalFilename());

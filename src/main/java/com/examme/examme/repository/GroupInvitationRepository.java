@@ -18,5 +18,7 @@ public interface GroupInvitationRepository extends JpaRepository<GroupInvitation
     @Query("SELECT i FROM GroupInvitation i JOIN FETCH i.group JOIN FETCH i.student WHERE i.id = :id")
     Optional<GroupInvitation> findFetchedById(@Param("id") Long id);
 
+    java.util.List<GroupInvitation> findAllByStudentOrderByCreatedAtDesc(User student);
+
     void deleteAllByStudent(User student);
 }

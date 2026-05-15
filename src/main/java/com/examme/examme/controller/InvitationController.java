@@ -1,6 +1,7 @@
 package com.examme.examme.controller;
 
 import com.examme.examme.dto.common.ApiResponse;
+import com.examme.examme.dto.response.group.InvitationResponseDto;
 import com.examme.examme.service.StudentInvitationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -8,6 +9,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Tag(name = "Invitations")
 @RestController
@@ -18,6 +21,12 @@ import org.springframework.web.bind.annotation.*;
 public class InvitationController {
 
     private final StudentInvitationService studentInvitationService;
+
+    @Operation(summary = "List my group invitations")
+    @GetMapping
+    public ResponseEntity<List<InvitationResponseDto>> list() {
+        return ResponseEntity.ok(studentInvitationService.listMine());
+    }
 
     @Operation(summary = "Accept group invitation")
     @PostMapping("/{invitationId}/accept")

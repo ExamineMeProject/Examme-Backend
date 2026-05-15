@@ -7,6 +7,7 @@ import com.examme.examme.entity.enums.InvitationStatus;
 import com.examme.examme.exception.BadRequestException;
 import com.examme.examme.exception.ForbiddenException;
 import com.examme.examme.exception.NotFoundException;
+import com.examme.examme.dto.response.group.InvitationResponseDto;
 import com.examme.examme.repository.GroupInvitationRepository;
 import com.examme.examme.repository.StudyGroupRepository;
 import com.examme.examme.repository.UserRepository;
@@ -15,6 +16,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class StudentInvitationService {
@@ -22,6 +26,21 @@ public class StudentInvitationService {
     private final GroupInvitationRepository invitationRepository;
     private final StudyGroupRepository studyGroupRepository;
     private final UserRepository userRepository;
+
+    public List<InvitationResponseDto> listMine() {
+        User student = userRepository.findByEmail(SecurityUtils.requireCurrentUserEmail())
+                .orElseThrow(() -> new NotFoundException("User not found"));
+        return invitationRepository.findAllByStudentOrderByCreatedAtDesc(student).stream()
+                .map(i -> InvitationResponseDto.builder()
+                        .id(i.getId())
+                        .groupId(i.getGroup().getId())
+                        .groupName(i.getGroup().getName())
+                        .teacherEmail(i.getGroup().getTeacher().getEmail())
+                        .status(i.getStatus())
+                        .invitedAt(i.getCreatedAt())
+                        .build())
+                .collect(Collectors.toList());
+    }
 
     @Transactional
     public void accept(Long invitationId) {

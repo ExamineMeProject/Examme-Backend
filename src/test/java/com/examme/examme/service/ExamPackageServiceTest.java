@@ -42,7 +42,7 @@ class ExamPackageServiceTest {
     @Mock
     private FileProcessingUtil fileProcessingUtil;
     @Mock
-    private GeminiQuestionGeneratorService geminiQuestionGeneratorService;
+    private GroqQuestionGeneratorService groqQuestionGeneratorService;
 
     @InjectMocks
     private ExamPackageService examPackageService;
@@ -74,7 +74,7 @@ class ExamPackageServiceTest {
             qDto.setOptions(Map.of("A", "1", "B", "2", "C", "3", "D", "4"));
             qDto.setCorrectAnswer("A");
             
-            when(geminiQuestionGeneratorService.generateFromLectureText(anyString(), anyInt(), any(), anyString()))
+            when(groqQuestionGeneratorService.generateFromLectureText(anyString(), anyInt(), any(), anyString()))
                     .thenReturn(List.of(qDto));
             
             when(examPackageRepository.save(any(ExamPackage.class))).thenAnswer(i -> {
